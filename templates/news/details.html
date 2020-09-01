@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Просмотр детальной информации
+{% endblock title %}
+
+
+{% block header %}
+    Просмотр детальной информации
+{% endblock header %}
+
+
+{% block content %}
+    <div id="main_box" class="container">
+        <h3>Просмотр детальной информации</h3>
+        <ul>
+    {% for post in latest_posts %}
+        <li>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+        <hr class="my_row">
+    </div>
+    <style>
+        #main_box {
+            margin-top: 300px;
+            text-align: center;
+        }
+        .my_row {
+            border-color: gray;
+            margin-top: 25px;
+        }
+    </style>
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+    NewsPortal - Новости
+{% endblock title %}
+
+
+{% block header %}
+    Новости
+{% endblock header %}
+
+
+{% block content %}
+    <div id="main_box" class="container">
+        <h3>Новости</h3>
+        <hr class="my_row">
+        {% if user  %}
+            <a href="/news/create">Добавить новость</a>
+        {% endif %}
+        <table class="news" border="1">
+            <tr>
+                <th>Пользователь</th>
+                <th>Заголовок</th>
+                <th>Сообщение</th>
+                <th>Автор</th>
+                <th>Опубликовано</th>
+            </tr>
+            {% for post in posts %}
+                <tr>
+                    <td>{{ user}}</td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.content }}</td>
+                    <td>{{ post.author }}</td>
+                    <td>{{ post.published }}</td>
+
+                    <td>
+                        <a href="{{ post.source }}">{{ post.source }}</a>
+                    </td>
+                    <td>
+                        |
+                        <a href="/news/details/{{ post.id }}">Details</a>
+                        |
+                        <a href="/news/edit/{{ post.id }}">Edit</a>
+                        |
+                        <a href="/news/delete/{{ post.id }}">Delete</a>
+                        |
+                    </td>
+                </tr>
+
+            {% endfor %}
+            <ul class="dropdown-list">
+                                    {% for author in authors %}
+                                    <li><a href="/news/author/{{author.name}}/">{{author.name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+        </table>
+        <hr class="my_row">
+    </div>
+    <style>
+        #main_box {
+            margin-top: 200px;
+            text-align: center;
+        }
+        .my_row {
+            border-color: gray;
+            margin-top: 25px;
+        }
+        .news {
+            width: 100%;
+        }
+        .news th, .news td {
+            padding: 5px 10px;
+        }
+    </style>
+{% endblock content %}
